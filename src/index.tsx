@@ -4,8 +4,16 @@ import { useState } from "react";
 import Board from "./Board";
 import './index.css';
 
+type GameState = {
+    squares: Array<number>
+    location: {
+        col: number | null;
+        row: number | null;
+    }
+}
+
 const Game = (props) =>  {
-    const [history, setHistory] = useState([
+    const [history, setHistory] = useState<GameState[]>([
         {
             squares: Array(9).fill(null),
             location: {
@@ -26,7 +34,7 @@ const Game = (props) =>  {
         }
         squares[i] = xIsNext ? 'X' : 'O';
 
-        setHistory([...historyCurrent as { squares: Array<number>, location: {col: number, row: number}}, { squares, location: {col: i % 3, row: Math.trunc(i / 3)} }]);
+        setHistory([...historyCurrent, { squares, location: {col: i % 3, row: Math.trunc(i / 3)} }]);
         setStepNumber(historyCurrent.length);
         setXIsNext(!xIsNext);
     }

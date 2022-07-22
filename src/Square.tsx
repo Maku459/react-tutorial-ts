@@ -1,7 +1,9 @@
 import React from "react";
 
+type oneSquareType = "X" | "O" | null;
+
 type Props = {
-    value: Array<number>[number]
+    value: Array<oneSquareType>[number]
     onClick: () => void
 }
 

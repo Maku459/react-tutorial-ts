@@ -4,16 +4,17 @@ import { useState } from "react";
 import Board from "./Board";
 import './index.css';
 
-type GameState = {
-    squares: Array<number>
+type oneSquareType = "X" | "O" | null;
+type gameState = {
+    squares: Array<oneSquareType>
     location: {
         col: number | null;
         row: number | null;
     }
 }
 
-const Game = (props) =>  {
-    const [history, setHistory] = useState<GameState[]>([
+const Game = () =>  {
+    const [history, setHistory] = useState<gameState[]>([
         {
             squares: Array(9).fill(null),
             location: {
@@ -22,8 +23,8 @@ const Game = (props) =>  {
             }
         }
     ]);
-    const [stepNumber, setStepNumber] = useState(0);
-    const [xIsNext, setXIsNext] = useState(true);
+    const [stepNumber, setStepNumber] = useState<number>(0);
+    const [xIsNext, setXIsNext] = useState<boolean>(true);
 
     const handleClick = (i: number) => {
         const historyCurrent = history.slice(0, stepNumber + 1);
@@ -38,7 +39,7 @@ const Game = (props) =>  {
         setStepNumber(historyCurrent.length);
         setXIsNext(!xIsNext);
     }
-    const jumpTo = (step) => {
+    const jumpTo = (step: number) => {
         setStepNumber(step);
         setXIsNext((step % 2) === 0);
     }
@@ -46,7 +47,7 @@ const Game = (props) =>  {
     const current = history[stepNumber];
     const winner = calculateWinner(current.squares);
 
-    const moves = history.map((step, move) => { //このstepは一体なんだ・・・
+    const moves = history.map((step, move) => { 
         const desc = move ?
             'Go to move #' + move + '(' + step.location.col + ',' + step.location.row + ')' :
             'Go to game start';
@@ -87,10 +88,10 @@ const Game = (props) =>  {
 
 // ========================================
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(<Game />);
 
-const calculateWinner = (squares) => {
+const calculateWinner = (squares: Array<oneSquareType>) => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],

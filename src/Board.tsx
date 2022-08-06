@@ -1,7 +1,6 @@
 import React from "react";
+import { oneSquareType } from ".";
 import Square from "./Square";
-
-type oneSquareType = "X" | "O" | null;
 
 type Props = {
     squares: Array<oneSquareType>

@@ -1,6 +1,5 @@
 import React from "react";
-
-type oneSquareType = "X" | "O" | null;
+import { oneSquareType } from ".";
 
 type Props = {
     value: Array<oneSquareType>[number]

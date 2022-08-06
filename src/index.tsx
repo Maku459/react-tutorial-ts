@@ -4,7 +4,7 @@ import { useState } from "react";
 import Board from "./Board";
 import './index.css';
 
-type oneSquareType = "X" | "O" | null;
+export type oneSquareType = "X" | "O" | null;
 type gameState = {
     squares: Array<oneSquareType>
     location: {
